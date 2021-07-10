@@ -7,10 +7,12 @@ return (
 <table className="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
+        {/* use the Thumbnail result from Picture array */}
+      <th scope="col">Thumbnail</th>
       <th scope="col">First</th>
       <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">E-Mail</th>
+      <th scope="col">Cell Phone</th>
     </tr>
   </thead>
   <tbody>
