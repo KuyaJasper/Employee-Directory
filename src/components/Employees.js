@@ -90,7 +90,7 @@ class Employees extends Component {
 
   render() {
     return (
-      <div>
+      <div className="employees">
         <SearchBar search={this.state.search} typeName={this.typeName}/>
         <Sort
           sortByFirstName={this.sortByFirstName}
