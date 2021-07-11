@@ -8,12 +8,13 @@ class Employees extends Component {
     search: "",
     results: [],
     sort: "",
+    typedResults:[]
   };
 
   componentDidMount() {
     API.getRandomUser()
       .then((res) => {
-        this.setState({ results: res.data.results });
+        this.setState({ results: res.data.results, typedResults: res.data.results });
       })
       .catch((err) => console.log(err));
   }
@@ -72,11 +73,25 @@ class Employees extends Component {
     this.setState({ results: sortedEmail });
   };
 
+  typeName = (event) => {
+    
+    event.preventDefault();
+    const name = event.target.name;
+    const value = event.target.value.toLowerCase();
+
+    this.setState({
+      [name]: value,
+      results: this.state.typedResults.filter(person => person.name.first.toLowerCase().includes(value)),
+    });
+ 
+
+  };
+
 
   render() {
     return (
       <div>
-        <SearchBar />
+        <SearchBar search={this.state.search} typeName={this.typeName}/>
         <Sort
           sortByFirstName={this.sortByFirstName}
           sort={this.state.sort}

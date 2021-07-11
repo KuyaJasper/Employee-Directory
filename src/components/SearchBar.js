@@ -1,13 +1,17 @@
-import React from 'react'
+import React from "react";
 
-function SearchBar() {
-    return (
-<div className="form-floating">
-  <input type="password" className="form-control" id="floatingPassword" placeholder="Password"/>
-  <label for="floatingPassword">Search</label>
-  </div>
-    )
-
+function SearchBar(props) {
+  return (
+    <div className="form-floating">
+      <input
+        onChange={props.typeName}
+        type="text"
+        className="form-control"
+        id="searchBar"
+      />
+      <label for="searchBar">Enter Employee Name</label>
+    </div>
+  );
 }
 
 export default SearchBar;
