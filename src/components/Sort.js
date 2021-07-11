@@ -3,8 +3,8 @@ import React from 'react';
 function Sort (props){
 return(
     <div>
-  <button onClick={props.sortByFirstName}> First Name</button>
-  <button onClick={props.sortByLastName}> Last Name</button>
+  <button onClick={props.sortByFirstName} className="btn btn-dark"> First Name</button>
+  <button onClick={props.sortByLastName} className="btn btn-secondary"> Last Name</button>
 </div>
 
 )
