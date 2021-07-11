@@ -40,7 +40,7 @@ The user should be able to:
 
 Example of how deployed application should run:
 
-![Screen-Recording](enter screen recording)
+![Screen-Recording](./Assets/ScreenRecording.gif)
 
 # Application
 
