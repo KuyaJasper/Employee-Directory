@@ -1,42 +1,116 @@
-import React, {Component} from 'react'
-import API from '../utils/API';
+import React, { Component } from "react";
+import API from "../utils/API";
+import SearchBar from "./SearchBar";
+import Sort from "./Sort";
 
-function Employees(){
-return (
-    <div>
-<table className="table">
-  <thead>
-    <tr>
-        {/* use the Thumbnail result from Picture array */}
-      <th scope="col">Thumbnail</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">E-Mail</th>
-      <th scope="col">Cell Phone</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-    </div>
-)
+class Employees extends Component {
+  state = {
+    search: "",
+    results: [],
+    sort: "",
+  };
+
+  componentDidMount() {
+    API.getRandomUser()
+      .then((res) => {
+        this.setState({ results: res.data.results });
+      })
+      .catch((err) => console.log(err));
+  }
+
+  sortByFirstName = () => {
+    var sortedFirstName = this.state.results.sort(function (a, b) {
+      var nameA = a.name.first.toLowerCase();
+      var nameB = b.name.first.toLowerCase();
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    });
+    this.setState({ results: sortedFirstName });
+  };
+
+  sortByLastName = () => {
+    var sortedLastName = this.state.results.sort(function (a, b) {
+      var nameA = a.name.last.toLowerCase();
+      var nameB = b.name.last.toLowerCase();
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    });
+    this.setState({ results: sortedLastName });
+  };
+
+  sortByEmail = () => {
+    var sortedEmail = this.state.results.sort(function (a, b) {
+      var nameA = a.email.toLowerCase();
+      var nameB = b.email.toLowerCase();
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    });
+    this.setState({ results: sortedEmail });
+  };
+
+
+  render() {
+    return (
+      <div>
+        <SearchBar />
+        <Sort
+          sortByFirstName={this.sortByFirstName}
+          sort={this.state.sort}
+          sortByLastName={this.sortByLastName}
+          sortByEmail={this.sortByEmail}
+        />
+        <table className="table">
+          <thead>
+            <tr>
+              {/* use the Thumbnail result from Picture array */}
+              <th scope="col">Thumbnail</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">E-Mail</th>
+              <th scope="col">Cell Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.results.map((person) => (
+              <tr>
+                <th scope="row">
+                  <img src={person.picture.thumbnail}></img>
+                </th>
+                <td>{person.name.first}</td>
+                <td>{person.name.last}</td>
+                <td>{person.email}</td>
+                <td>{person.cell}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 }
 
 export default Employees;
