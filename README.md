@@ -44,7 +44,7 @@ Example of how deployed application should run:
 
 # Application
 
- [![Deployed Application](https://img.shields.io/badge/-Click_Here-58a780?style=for-the-badge)]((enterlink here))
+ [![Deployed Application](https://img.shields.io/badge/-Click_Here-58a780?style=for-the-badge)]((https://kuyajasper.github.io/Employee-Directory/))
 
 
 # Questions
